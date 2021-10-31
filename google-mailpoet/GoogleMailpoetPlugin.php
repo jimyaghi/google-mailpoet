@@ -60,8 +60,13 @@ namespace YL {
 				exit;
 			}
 
+			$json = file_get_contents('php://input');
+
+			// Converts it into a PHP object
+			$req = json_decode($json, true);
+
 			$lead = [];
-			foreach ( ( $_REQUEST['user_column_data'] ?? [] ) as $data ) {
+			foreach ( ( $req['user_column_data'] ?? [] ) as $data ) {
 				$lead[ strtolower( $data['column_id'] ) ] = $data['string_value'];
 			}
 
@@ -79,8 +84,13 @@ namespace YL {
 
 			$first_name = $lead['first_name'] ?? '';
 			$last_name  = $lead['last_name'] ?? '';
+			$full_name = $lead['full_name'] ?? '';
+			$parts = explode($full_name, ' ');
+			if(!$full_name) {
+				$first_name = array_shift( $parts );
+				$last_name  = implode( ' ', $parts );
+			}
 			$phone      = $lead['phone_number'];
-
 			$password = wp_generate_password( 12, true, true );
 			$user     = get_user_by( 'email', $email );
 
