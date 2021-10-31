@@ -90,7 +90,7 @@ namespace YL {
 				$first_name = array_shift( $parts );
 				$last_name  = implode( ' ', $parts );
 			}
-			$phone      = $lead['phone_number'];
+			$phone      = $lead['phone_number'] ?? '';
 			$password = wp_generate_password( 12, true, true );
 			$user     = get_user_by( 'email', $email );
 
@@ -99,7 +99,7 @@ namespace YL {
 				if ( is_wp_error( $user_id ) ) {
 					exit;
 				}
-				$user = \get_user_by( 'email', $email );
+				$user = get_user_by( 'email', $email );
 				$user->set_role( 'subscriber' );
 				if ( ! $first_name && ! $last_name ) {
 					$name       = explode( '@', $email );
