@@ -1,0 +1,13 @@
+{
+    "name": "jimyaghi/google-mailpoet",
+    "description": "Adds google lead form leads to mailpoet lists",
+    "license": "LGPL-2.1-only",
+    "type": "wordpress-plugin",
+    "authors": [
+        {
+            "name": "Jim Yaghi",
+            "email": "jim@jimyaghi.com"
+        }
+    ],
+    "require": {}
+}
